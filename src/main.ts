@@ -1,6 +1,7 @@
 import { defaultKeymap } from "@codemirror/commands";
 import { html } from "@codemirror/lang-html";
 import { EditorState } from "@codemirror/state";
+import { oneDark } from "@codemirror/theme-one-dark";
 import { EditorView, keymap } from "@codemirror/view";
 import { renderToIframe } from "./render-to-iframe";
 import { createResizeDragger } from "./resize-dragger";
@@ -21,7 +22,7 @@ preview.srcdoc = startDoc;
 new EditorView({
   state: EditorState.create({
     doc: startDoc,
-    extensions: [keymap.of(defaultKeymap), html(), renderToIframe(preview)],
+    extensions: [keymap.of(defaultKeymap), html(), oneDark, renderToIframe(preview)],
   }),
   parent: document.getElementById("editor")!,
 });
