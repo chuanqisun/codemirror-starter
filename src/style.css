@@ -1,5 +1,6 @@
 :root {
   font-family: system-ui, sans-serif;
+  color-scheme: light dark;
 }
 
 *,
@@ -17,7 +18,7 @@ body {
 
 #container {
   display: grid;
-  grid-template-columns: 1fr 5px 1fr;
+  grid-template-columns: 1fr 8px 1fr;
   height: 100%;
 }
 
@@ -42,6 +43,6 @@ body {
   width: 100%;
   border: none;
   outline: none;
-  padding: 4px 8px;
+  padding: 8px;
   font-family: inherit;
 }
