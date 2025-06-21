@@ -1,7 +1,7 @@
 import { defaultKeymap } from "@codemirror/commands";
 import { html } from "@codemirror/lang-html";
 import { EditorState } from "@codemirror/state";
-import { EditorView, keymap } from "@codemirror/view";
+import { drawSelection, EditorView, keymap } from "@codemirror/view";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode/src/index.ts";
 import { createCommandPanelExtension } from "./command-panel";
 import { renderToIframe } from "./render-to-iframe";
@@ -27,6 +27,7 @@ new EditorView({
       keymap.of([...defaultKeymap]),
       html(),
       vscodeDark,
+      drawSelection(),
       renderToIframe(preview),
       createCommandPanelExtension(),
     ],
