@@ -2,6 +2,7 @@ import { defaultKeymap } from "@codemirror/commands";
 import { html } from "@codemirror/lang-html";
 import { EditorState } from "@codemirror/state";
 import { EditorView, keymap } from "@codemirror/view";
+import { renderToIframe } from "./render-to-iframe";
 import { createResizeDragger } from "./resize-dragger";
 import "./style.css";
 
@@ -14,23 +15,15 @@ const startDoc = `<!DOCTYPE html>
   </body>
 </html>`;
 
-new EditorView({
-  state: EditorState.create({
-    doc: startDoc,
-    extensions: [keymap.of(defaultKeymap), html(), updateIframeOnChange()],
-  }),
-  parent: document.getElementById("editor")!,
-});
-
 const preview = document.getElementById("preview") as HTMLIFrameElement;
 preview.srcdoc = startDoc;
 
-function updateIframeOnChange() {
-  return EditorView.updateListener.of((v) => {
-    if (v.docChanged) {
-      preview.srcdoc = v.state.doc.toString();
-    }
-  });
-}
+new EditorView({
+  state: EditorState.create({
+    doc: startDoc,
+    extensions: [keymap.of(defaultKeymap), html(), renderToIframe(preview)],
+  }),
+  parent: document.getElementById("editor")!,
+});
 
 createResizeDragger({ draggable: document.getElementById("drag")!, resizable: document.getElementById("container")! });
